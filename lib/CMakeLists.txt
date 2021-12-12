@@ -3,18 +3,19 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
   ${CMAKE_CURRENT_SOURCE_DIR}/*.c
 )
 
-add_library(shape STATIC ${SRC_FILES})
+add_library(word STATIC ${SRC_FILES})
 
-# shape 의 include 경로 지정
-target_include_directories(shape PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(word PUBLIC ${CMAKE_SOURCE_DIR}/includes)
 
-# shape 의 컴파일 옵션 지정
-target_compile_options(shape PRIVATE -Wall -Werror)
+target_compile_options(word PRIVATE -Wall -Werror)
+
+target_link_libraries(word PRIVATE curl)
+
 
 #[[
 
-# shape 를 C++ 17 로 컴파일
-target_compile_features(shape PRIVATE cxx_std_17)
+# word 를 C++ 17 로 컴파일
+target_compile_features(word PRIVATE cxx_std_17)
 
 # FetchContent 를 사용하기 위해 include.
 include(FetchContent)
@@ -27,7 +28,7 @@ FetchContent_Declare(
   )
 FetchContent_MakeAvailable(Fmt)
 
-# shape 에 링크
-target_link_libraries(shape PRIVATE fmt)
+# word 에 링크
+target_link_libraries(word PRIVATE fmt)
 
 ]]

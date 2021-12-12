@@ -1,9 +1,6 @@
-#include "shape.h"
+#include <stdio.h>
 
 int main(void) {
-    Rectangle rect;
-    Rectangle_init(&rect, 10, 30);
-    Rectangle_print(&rect);
-
-    return 0;
+  printf("Hello World!\n");
+  return 0;
 }

@@ -3,5 +3,5 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
   ${CMAKE_CURRENT_SOURCE_DIR}/*.c
 )
 
-add_executable(shape_test ${SRC_FILES})
-target_link_libraries(shape_test PRIVATE shape cgreen)
+add_executable(test ${SRC_FILES})
+target_link_libraries(test PRIVATE cgreen curl word)
