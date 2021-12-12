@@ -13,7 +13,7 @@
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install -y gcc g++ make cmake
-sudo apt install -y curl html-xml-utils
+sudo apt install -y curl libcurl4-openssl-dev html-xml-utils
 
 cwd=$(pwd)
 cd /tmp
