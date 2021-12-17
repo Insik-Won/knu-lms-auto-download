@@ -13,17 +13,7 @@
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install -y gcc g++ make cmake
-sudo apt install -y curl libcurl4-openssl-dev html-xml-utils
-
-cwd=$(pwd)
-cd /tmp
-git clone https://github.com/cgreen-devs/cgreen.git ./cgreen-build
-cd cgreen-build
-make
-make test
-make install
-sudo ldconfig
-cd $cwd
+sudo apt install -y curl libcurl4-openssl-dev libcmocka-dev html-xml-utils
 
 git clone https://github.com/Insik-Won/knu-lms-auto-download.git
 cd knu-lms-auto-download/build
