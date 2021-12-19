@@ -87,6 +87,14 @@ unset cwd
 
 ## 실행방법 : 테스트
 
+1. ./tests/resources 디렉토리에 .env 파일을 만들고 다음과 같이 쓴다.
+```text
+USER_ID={시스템프로그래밍 003을 수강하는 학생의 통합 로그인 ID}
+PASSWORD={해당 학생의 통합 로그인 비밀번호}
+STUDENT_NUMBER={해당 학생의 경북대 학번}
+```
+
+2. 다음 명령어를 입력한다.
 ```shell
 ./knu-lms-auto-download/build/bin/test
 ```
