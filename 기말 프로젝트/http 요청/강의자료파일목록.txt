@@ -1,0 +1,100 @@
+
+
+
+
+
+
+
+
+
+<style>
+.file_list_div{border: 1px solid #666; z-index: 999; position: absolute ; background-color: white;}
+.header_div{margin-bottom: 5px; overflow: hidden; margin-top: 5px;}
+.header_title{float: left; width:100px; overflow: hidden; margin-left: 10px;}
+.header_close{float:right; margin-right: 2px;}
+.close_img{cursor: pointer;}
+.list_div{clear: both; padding: 0 10px 5px 10px;}
+.list_div > ul > li {clear: both;}
+.clip_img_div{float: left; overflow: hidden;}
+.file_list_nm{float: left; margin-bottom:5px; margin-top:-2px; text-decoration: underline; overflow: hidden; margin-left: 5px;}   
+</style>
+<script type="text/javascript">
+$(function(){
+  $(".close_img").click(function(){
+    $(".file_list_div").remove();
+  });
+  $(document).mousedown(function(e){
+    if($(e.target).parents(".file_list_div").size() == 0) {
+      $(".file_list_div").remove();
+    }
+  });
+//   $(".file_list_div").css("right", $(".file_list_div").width() - 45);
+  $(".file_list_div").css("right", 85);
+});
+function test(e){
+  alert(e);
+}
+</script>
+
+<div class="file_list_div">
+  <div class="header_div">  
+    <div class="header_title">파일목록</div>
+    <div class="header_close">
+      <img class="close_img" alt="파일목록 닫기" src="/ilos/images/common/material/cross.png">
+    </div>
+  </div>
+  <div class="list_div">
+    <div>
+      
+      <div style="clear: both;">
+        <div class="clip_img_div"><img src="/ilos/images/themes/red/paperclip.png"></div>
+        <div class="file_list_nm">
+          <a class="site-link" target='file_down'  title="첨부파일 다운로드" onclick="location.href='/ilos/pf/course/lecture_material_list_zip_download2.acl?CONTENT_SEQ=6339205&amp;ky=A20213ELEC462003&amp;ud=2021113585&amp;pf_st_flag=2'">
+            전체 다운로드
+          </a>
+        </div>
+      </div>
+      
+      
+      <div style="clear: both;">
+        <div class="clip_img_div"><img src="/ilos/images/themes/red/paperclip.png"></div>
+        <div class="file_list_nm">
+          <a class="site-link"  onclick="location.href='/ilos/co/efile_download2.acl?FILE_SEQ=BYIU3C7VWHUBC&amp;CONTENT_SEQ=6339205&amp;ky=A20213ELEC462003&amp;ud=2021113585&amp;pf_st_flag=2'" target='file_down'  title="첨부파일 다운로드">
+            11. Connecting to Processes Near and Far Servers and Sockets (1).pdf
+          </a>
+        </div>
+      </div>
+      
+      <div style="clear: both;">
+        <div class="clip_img_div"><img src="/ilos/images/themes/red/paperclip.png"></div>
+        <div class="file_list_nm">
+          <a class="site-link"  onclick="location.href='/ilos/co/efile_download2.acl?FILE_SEQ=DVA736URVO2HY&amp;CONTENT_SEQ=6339205&amp;ky=A20213ELEC462003&amp;ud=2021113585&amp;pf_st_flag=2'" target='file_down'  title="첨부파일 다운로드">
+            14. Threads - Concurrent Functions.pdf
+          </a>
+        </div>
+      </div>
+      
+      <div style="clear: both;">
+        <div class="clip_img_div"><img src="/ilos/images/themes/red/paperclip.png"></div>
+        <div class="file_list_nm">
+          <a class="site-link"  onclick="location.href='/ilos/co/efile_download2.acl?FILE_SEQ=KSSSUB5KDARBS&amp;CONTENT_SEQ=6339205&amp;ky=A20213ELEC462003&amp;ud=2021113585&amp;pf_st_flag=2'" target='file_down'  title="첨부파일 다운로드">
+            ch11.zip
+          </a>
+        </div>
+      </div>
+      
+      <div style="clear: both;">
+        <div class="clip_img_div"><img src="/ilos/images/themes/red/paperclip.png"></div>
+        <div class="file_list_nm">
+          <a class="site-link"  onclick="location.href='/ilos/co/efile_download2.acl?FILE_SEQ=GWBNWPJ5YAG3Q&amp;CONTENT_SEQ=6339205&amp;ky=A20213ELEC462003&amp;ud=2021113585&amp;pf_st_flag=2'" target='file_down'  title="첨부파일 다운로드">
+            ch14.zip
+          </a>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+
+<iframe name="file_down" style="width:0px; height:0px" frameborder="0"></iframe>   

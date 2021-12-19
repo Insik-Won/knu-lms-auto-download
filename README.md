@@ -47,15 +47,19 @@
 │   ├── knulms.c        # knulms.h 정의
 │   ├── knustring.c     # knustring.h 정의
 │   └── knuutils.c      # knuutils.h 정의
-└── tests
-    ├── CMakeLists.txt  # 단위 테스트 CmakeLists.txt
-    ├── all_tests.c     # 모든 단위 테스트 실행
-    ├── resources       # 단위 테스트에 사용할 리소스 파일
-    │   └── ...
-    ├── test_knuapi.c   # knuapi 라이브러리를 단위 테스트하는 파일
-    ├── test_knustring.c # knustring 라이브러리를 단위 테스트하는 파일
-    ├── test_knuutils.c # knuutils 라이브러리를 단위 테스트하는 파일
-    └── test_util.c     # test_util.h 정의
+├── tests
+│   ├── CMakeLists.txt  # 단위 테스트 CmakeLists.txt
+│   ├── resources       # 단위 테스트에 사용할 리소스 파일
+│   │   └── ...
+│   ├── test_knuapi.c   # knuapi 라이브러리를 단위 테스트하는 파일
+│   ├── test_knustring.c # knustring 라이브러리를 단위 테스트하는 파일
+│   ├── test_knuutils.c # knuutils 라이브러리를 단위 테스트하는 파일
+│   └── test_util.c     # test_util.h 정의
+└── 기말 프로젝트
+    ├── 2021113585 원인식 프로젝트 계획서.txt # 계획서
+    ├── http 요청
+    │   └── ...            # 경북대 lms 크롤링을 위해 만든 curl 명령 쉘 파일
+    └── 프로젝트 계획.txt   # 프로젝트 초안 및 기획
 ```
 
 ## 빌드방법

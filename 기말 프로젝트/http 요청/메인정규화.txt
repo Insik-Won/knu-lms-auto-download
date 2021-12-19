@@ -1,0 +1,804 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="ko">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+       />
+    <meta content="경북대학교" name="name" />
+    <meta content="noindex, nofollow" name="name" /><!-- 설치된 IE중 최신버전 렌더링 설정 -->
+
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="Copyright(C) IMAXSOFT" name="name" />
+    <link href="/ilos/favicon.ico?v=20210217" rel="shortcut icon" />
+    <link href="/ilos/favicon-16x16.png" rel="icon" sizes="16x16" />
+    <link href="/ilos/favicon-32x32.png" rel="icon" sizes="32x32" />
+    <link href="/ilos/favicon-96x96.png" rel="icon" sizes="96x95" />
+    <link href="/ilos/images/m/e-Class-icon.png"
+      rel="apple-touch-icon-precomposed" />
+    <title>경북대학교 학습관리시스템</title>
+
+    <link href="/ilos/css/ass.css?v=20210217" rel="stylesheet"
+      type="text/css" />
+    <link href="/ilos/css/themes/red.css?v=20210217" rel="stylesheet"
+      type="text/css" />
+    <link href="/ilos/css/osms/knu/default.css?v=20210217"
+      rel="stylesheet" type="text/css" />
+    <link href="/ilos/css/font/ko.css?v=20210217" rel="stylesheet"
+      type="text/css" />
+    <style><![CDATA[
+#top2m1,#top2m2,#top2m3 {display:none;}
+
+.gnb-top-class > div {
+  width: 176px; height: 25px; 
+  padding-top: 6px;
+}
+.gnb-top-class > div > a { color: #fff; text-decoration: none; }
+.gnb-top-class-off  { background-color: #b6b6b6;}
+
+.gnb-sub-class > a{
+  padding: 3px 15px 5px 15px; 
+  text-align: center; 
+  overflow: hidden;
+  width: 100%;
+  text-decoration: none;
+}
+]]></style>
+    <link
+      href="/ilos/css/jquery-ui-1.11.4/jquery-ui.min.css?v=20210217"
+      rel="stylesheet" type="text/css" /></head>
+
+  <body>
+    <div id="progress"
+      style="display: none; width: 80px; height: 80px; -webkit-border-radius: 10px; border-radius:10px; background-color: #000;"
+      ></div>
+  </body>
+
+  <head>
+    <link href="/ilos/css/main.css?v=20210217" rel="stylesheet"
+      type="text/css" />
+    <link href="/ilos/css/schedule.css?v=20210217" rel="stylesheet"
+      type="text/css" />
+    <style><![CDATA[
+#loading{
+  position: absolute;
+  background-color: #f0faf0;
+  filter: alpha(opacity=30);
+  -moz-opacity: 0.3;
+  -khtml-opacity: 0.3;
+  opacity: 0.3; 
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  display: none;
+  top: 0;
+  text-align: center;
+  overflow: hidden;
+}
+#loadingimg{
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: url('/ilos/images/loading.png') no-repeat center center;
+}
+#impt-loading {
+  display: none;
+}
+#impt-loadingimg{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  vertical-align: middle;
+  border-radius: 50%;
+  border: 1px solid #999;
+  border-top: 1px solid #eee;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+.noTitleStuff .ui-dialog-titlebar {display:none}
+]]></style></head>
+
+  <body>
+    <ul id="skipNavigation">
+      <li><a class="site-color site-border-color"
+        href="#containerWrap">본문내용 바로가기</a></li>
+
+      <li><a class="site-color site-border-color" href="#gnbIndex"
+        >주메뉴 바로가기</a></li>
+    </ul>
+
+    <hr />
+
+    <div id="popup_room"></div>
+
+    <div id="wrap">
+      <div id="headerWrap"></div>
+    </div>
+  </body>
+
+  <head>
+    <style><![CDATA[
+.header_login {
+  font-family: 'Dotum','Apple SD Gothic Neo';
+  font-size: 11px;
+  color: #888;
+  border: 1px solid #BEBEBE;
+  background-color: #fff;
+  padding: 6px 8px 6px 8px !important;
+}
+.header_login_img {
+  margin-right: 6px;
+  width: 8px;
+  height: 8px;
+  background-image: url('/ilos/images/default.png');
+  background-repeat:  no-repeat;
+  background-size: 100% 100%;
+}
+.header_login > div {
+  display: inline-block;
+}
+.welcome-message > strong:hover {
+  text-decoration: underline;
+}
+.header_exit {
+  position: relative;
+  top: -2px;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 5px 5px 4px 5px;
+  font-family: 'Dotum','Apple SD Gothic Neo';
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+  border: 1px solid #EF6C00;
+  background-color: #FB8C00;
+}
+.header_exit:hover {
+  background-color: #EF6C00;
+}
+.header_logout {
+  position: relative;
+  top: -2px;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 4px 5px;
+  font-family: 'Dotum','Apple SD Gothic Neo';
+  font-size: 11px;
+  line-height: 1;
+  color: #666;
+  border: 1px solid #BEBEBE;
+  background-color: #F5F5F5;
+}
+.header_logout:hover {
+  color: #666;
+  border: 1px solid #999;
+  background-color: #fff;
+  
+}
+]]></style></head>
+
+  <body>
+    <div id="header"> <!-- IE 10 이상 -->
+      <div id="browser_header_logo"> <!-- 로고 이미지 -->
+        <h1 class="h_ko"> <img alt="e-class system" id="logo_img"
+          src="/ilos/images/osms/knu/ko/logo.gif?v=20210217" /></h1>
+<!-- 로고 a 태그용 --> <a href="/ilos/main/main_form.acl"></a>
+        <div id="logo_link"
+          style="width: 110px; height: 105px; position: absolute; top:14px; left:438px;"
+          ></div>
+      </div>
+<!-- IE 9 이하 -->
+      <div id="low_browser_header_logo"> <!-- 로고 이미지 -->
+        <h1 class="h_ko"> <a href="/ilos/main/main_form.acl"><img
+          alt="e-class system" id="logo_img"
+          src="/ilos/images/osms/knu/ko/logo.gif?v=20210217" /></a></h1
+        >
+      </div>
+
+      <div class="languages"> <!-- 관리자일 경우-->
+        <form action="/ilos/main/lang_change.acl" id="langform"
+          method="post" name="langform" onsubmit="return false;"></form
+        >
+        <select id="LANG" name="LANG"
+        style="background-color:#4C4C4C; height: 21px;" title="언어 선택">
+        <option selected="selected" value="ko">한국어</option>
+
+        <option value="en">English</option>
+        </select></div>
+
+      <div id="notification_pop" style="background-color: #F3F5F7;"
+        title="알림"></div>
+
+      <div class="utillmenu" style="margin-top: 87px;">
+        <!-- 로그인 했을시 -->
+        <div class="login" id="" style="position:relative;">
+          <div class="user_photo"
+            style=" margin-top: -6px; margin-right: 5px; vertical-align:middle;"
+            > <img alt="" id="user_photo"
+            src="/ilos/mp/user_image_view.acl?id=J2W6C66WZXJOC&ext=.jpg&size=32"
+            style="float: left;  width: 25px; height: 25px;" /></div>
+
+          <fieldset class="welcome-message"
+            style="position:relative; top: 1px; overflow: visible; vertical-align:middle;"
+            >
+            <legend>로그인</legend>
+            <strong class="site-font-color" id="user"
+            style="float: left ;letter-spacing:-1px;">원인식</strong>
+            <div class="message_content">
+              <div class="message_item"> <a
+                href="/ilos/message/received_list_pop_form.acl"
+                onclick="winOpen2(this.href,'msg','720','700');return false;"
+                target="msg" title="Message (새창으로 연결)"><img alt="쪽지"
+                onmouseout="$(this).attr('src','/ilos/images/message.png');"
+                onmouseover="$(this).attr('src','/ilos/images/themes/red/message.png');"
+                src="/ilos/images/message.png"
+                style="display:inline-block;" /></a>
+                <div class="new_cnt site-background-color"
+                  id="message_cnt"></div>
+              </div>
+
+              <div class="message_item"
+                onclick="popNotification(1,'');" title="알림"> <img
+                alt="알림"
+                onmouseout="$(this).attr('src','/ilos/images/notification.png');"
+                onmouseover="$(this).attr('src','/ilos/images/themes/red/notification.png');"
+                src="/ilos/images/notification.png"
+                style="display:inline-block;" />
+                <div class="new_cnt site-background-color"
+                  id="notice_cnt"></div>
+              </div>
+            </div>
+            <a href="/ilos/lo/logout.acl" style="float:left;"></a>
+            <div class="header_logout">로그아웃</div>
+          </fieldset>
+        </div>
+      </div>
+      <a class="scrollup">Back to the top</a></div>
+
+    <hr />
+<!-- Start Menual form -->
+
+    <div
+      style="width:500px; float: right;  position: absolute; z-index: 1000; margin-left: 451px; margin-top: 129px; "
+      >
+      <div id="outerMenual"
+        style="position:absolute; z-index: 8; display: none; padding-top: 13px; clear: both;"
+        ></div>
+    </div>
+<!-- End Menual form -->
+
+    <div class="users_list_wrap" id="show_users_dialog"></div>
+
+    <div id="gnb" style="height: 61px;">
+      <div id="gnbIndex">
+        <h2>주 메뉴</h2>
+
+        <ul id="top1menu" style="margin-left: 216px; width: 543px;">
+          <li style="overflow: hidden;">
+            <div class="gnb-top-class" id="top1m1"
+              onclick="pageGo('/ilos/st/main/course_ing_list_form.acl'); return false;"
+              >
+              <div class="gnb-top-class-off"><a
+                href="/ilos/st/main/course_ing_list_form.acl">교육현황</a
+                ></div>
+            </div>
+
+            <ul id="top2m1" style="left: 216px">
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/st/main/course_ing_list_form.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/st/main/course_ing_list_form.acl"
+                >개설과목검색</a></li>
+
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/ocw/courseware_list_form.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/ocw/courseware_list_form.acl">OCW</a></li>
+
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/st/schedule/academic_calendar_list_form.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/st/schedule/academic_calendar_list_form.acl"
+                >학사일정</a></li>
+            </ul>
+          </li>
+
+          <li class="space">
+            <div class="gnb-top-class" id="top1m2"
+              onclick="pageGo('/ilos/community/notice_list_form.acl'); return false;"
+              >
+              <div class="gnb-top-class-off"><a
+                href="/ilos/community/notice_list_form.acl">커뮤니티</a></div
+              >
+            </div>
+
+            <ul id="top2m2">
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/community/notice_list_form.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/community/notice_list_form.acl">공지사항</a></li
+              >
+
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/community/qna_list_form.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/community/qna_list_form.acl">질의응답</a></li>
+
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/community/material_list_form.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/community/material_list_form.acl">자료실</a>
+              </li>
+
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/community/share_group_list_form.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/community/share_group_list_form.acl"
+                >소모임</a></li>
+
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/community/total_survey_list_form.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/community/total_survey_list_form.acl"
+                >설문</a></li>
+            </ul>
+          </li>
+
+          <li class="space">
+            <div class="gnb-top-class" id="top1m3"
+              onclick="pageGo('/ilos/introduce/introduce.acl'); return false;"
+              >
+              <div class="gnb-top-class-off"><a
+                href="/ilos/introduce/introduce.acl">소개</a></div>
+            </div>
+
+            <ul id="top2m3">
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/introduce/introduce.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/introduce/introduce.acl">소개</a></li>
+
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/guide/guide_main_form.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/guide/guide_main_form.acl">FAQ</a></li>
+
+              <li class="gnb-sub-class"
+                onclick="pageGo('/ilos/introduce/sitemap.acl'); return false;"
+                > <a class="site-link2"
+                href="/ilos/introduce/sitemap.acl">사이트맵</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <hr />
+    </div>
+
+    <div id="containerWrap">
+      <div id="container">
+        <div id="contentsIndex">
+          <h2>본문 내용</h2>
+
+          <div class="locationmap">현재 본문 위치 : <strong>홈</strong></div>
+<!-- Start Edit -->
+          <div class="index-leftarea02">
+            <div
+              style="overflow: hidden; position: relative; width: 578px;"
+              >
+              <div class="shedule_form">
+                <div class="site-background-color"
+                  style="overflow: hidden; padding: 12px 15px;">
+                  <div
+                    style="float: left; font-size: 18px; font-weight: bold; color: #fff; font-family: malgun gothic; "
+                    >일정</div>
+                  <input id="show_schedule_list"
+                  onclick="getMainScheduleList('');"
+                  src="/ilos/images/common/view_list.png"
+                  style="width: 16px; height: 10px; float: right; margin-top: 2px; border-radius: 0px;"
+                  title="목록보기" type="image" /></div>
+              </div>
+
+              <div id="loading">
+                <div id="loadingimg"></div>
+              </div>
+            </div>
+
+            <div class="m-box2">
+              <div class="title-01">
+                <div class="bar site-background-color"></div>
+                <span>수강과목</span></div>
+
+              <ol>
+                <li class="term_info">2학기</li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em class="sub_open" kj="A20213CLTR205001"
+                  kj_auth="S"
+                  onclick="eclassRoom('A20213CLTR205001'); return false;"
+                  title="대학글쓰기 강의실 들어가기"> 대학글쓰기 (001) </em> <span>
+                  화(7A-8A),목(7A-8A) </span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em class="sub_open" kj="A20213CLTR043007"
+                  kj_auth="S"
+                  onclick="eclassRoom('A20213CLTR043007'); return false;"
+                  title="서양의역사와문화 강의실 들어가기"> 서양의역사와문화 (007) </em>
+                  <span> 화(8B-9B),목(8B-9B) </span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em class="sub_open" kj="A20213ELEC462003"
+                  kj_auth="S"
+                  onclick="eclassRoom('A20213ELEC462003'); return false;"
+                  title="시스템프로그래밍 강의실 들어가기"> 시스템프로그래밍 (003) </em>
+                  <span> 금(1A-4B) </span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em class="sub_open" kj="A20213COME331011"
+                  kj_auth="S"
+                  onclick="eclassRoom('A20213COME331011'); return false;"
+                  title="자료구조 강의실 들어가기"> 자료구조 (011) </em> <span>
+                  월(5B-6B),수(5B-6B) </span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em class="sub_open" kj="A20213COMP216003"
+                  kj_auth="S"
+                  onclick="eclassRoom('A20213COMP216003'); return false;"
+                  title="자료구조응용 강의실 들어가기"> 자료구조응용 (003) </em> <span>
+                  월(7A-8B),수(7A-8B) </span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em class="sub_open" kj="A20213ITEC423002"
+                  kj_auth="S"
+                  onclick="eclassRoom('A20213ITEC423002'); return false;"
+                  title="자료구조프로그래밍 강의실 들어가기"> 자료구조프로그래밍 (002) </em>
+                  <span> 금(6A-9B) </span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em class="sub_open" kj="A20213GLSO217001"
+                  kj_auth="S"
+                  onclick="eclassRoom('A20213GLSO217001'); return false;"
+                  title="컴퓨터망프로그래밍 강의실 들어가기"> 컴퓨터망프로그래밍 (001) </em>
+                  <span> 목(1A-4B) </span></li>
+
+                <li class="term_info">비정규과목</li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em class="sub_open" kj="N2021B2021sup3939"
+                  kj_auth="S"
+                  onclick="eclassRoom('N2021B2021sup3939'); return false;"
+                  title="2021년 경북대학교 장애인식개선 교육(학생) 강의실 들어가기"> 2021년
+                  경북대학교 장애인식개선 교육(학생) (39) </em> <span>
+                  2021.04.19~2021.12.26 </span></li>
+
+                <li style="border-bottom: 1px dotted #E6E6E6;"></li>
+              </ol>
+            </div>
+
+            <div class="m-box2">
+              <div class="title-01">
+                <div class="bar site-background-color"></div>
+                <span>공지사항</span>
+                <div class="whole"
+                  style="float: right; margin-top: 8px;"> <a
+                  href="/ilos/community/notice_list_form.acl"><img
+                  alt="공지사항" src="/ilos/images/ko/btn_all.gif" /></a>
+                </div>
+              </div>
+
+              <ol>
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em style="font-weight: normal;"> <a
+                  class="site-link"
+                  href="/ilos/community/notice_view_form.acl?ARTL_NUM=4736327"
+                  > [공통] 2021 신입생 LMS 이용 관련 안내 (로그인, 수강과목) </a> </em>
+                  <span class="date">2021.03.02</span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em style="font-weight: normal;"> <a
+                  class="site-link"
+                  href="/ilos/community/notice_view_form.acl?ARTL_NUM=4729273"
+                  > [공통] [신입생 재학생 필독] 학생들을 위한 LMS 매뉴얼 </a> </em>
+                  <span class="date">2021.02.25</span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em style="font-weight: normal;"> <a
+                  class="site-link"
+                  href="/ilos/community/notice_view_form.acl?ARTL_NUM=1213281"
+                  > [공통] [공지] 에버렉[everlec] 제작 영상은 변환작업없이 바로 서비스
+                  가능합니다... </a> </em> <span class="date"
+                  >2020.04.01</span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em style="font-weight: normal;"> <a
+                  class="site-link"
+                  href="/ilos/community/notice_view_form.acl?ARTL_NUM=851572"
+                  > [공통] 비대면강의 영상, 강의자료 유출 행위 주의 안내 </a> </em> <span
+                  class="date">2020.03.18</span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em style="font-weight: normal;"> <a
+                  class="site-link"
+                  href="/ilos/community/notice_view_form.acl?ARTL_NUM=6011048"
+                  > [공통] 2021학년도 2학기 글쓰기도움터 개소 안내 </a> </em> <span
+                  class="date">2021.10.01</span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em style="font-weight: normal;"> <a
+                  class="site-link"
+                  href="/ilos/community/notice_view_form.acl?ARTL_NUM=5914928"
+                  > [공통] 학습관리시스템(LMS) 시스템 점검 안내 </a> </em> <span
+                  class="date">2021.09.16</span></li>
+
+                <li
+                  style="padding-left: 10px; background: url('/ilos/images/main/ul_dot.png') no-repeat 0 49%;"
+                  > <em style="font-weight: normal;"> <a
+                  class="site-link"
+                  href="/ilos/community/notice_view_form.acl?ARTL_NUM=5860102"
+                  > [공통] 웹브라우저 Internet Explore 사용시 동영상 재생오류 </a> </em
+                  > <span class="date">2021.09.08</span></li>
+
+                <li style="border-bottom: 1px dotted #E6E6E6;"></li>
+              </ol>
+            </div>
+
+            <div class="m-box2">
+              <div class="title-01">
+                <div class="bar site-background-color"></div>
+                <span>오늘시간표</span> <span class="info"> (2021.12.11
+                토요일) </span>
+                <div class="whole"
+                  style="float: right; margin-top: 8px;"> <a
+                  href="/ilos/st/main/pop_academic_timetable_form.acl"
+                  onclick="pop_timetable(this.href);return false;"
+                  target="pop_timetable"><img alt="오늘시간표 전체보기"
+                  src="/ilos/images/ko/btn_all.gif" /></a></div>
+              </div>
+
+              <table border="1" class="course-datatable"
+                summary="오늘시간표 보기">
+                <caption>오늘시간표 보기</caption>
+
+                <colgroup><col style="width:85px;" /><col /><col
+                  style="width:85px;" /><col style="width:85px;" /></colgroup
+                >
+
+                <thead>
+                  <tr>
+                    <th class="first" scope="col">강의시간</th>
+
+                    <th scope="col">과목</th>
+
+                    <th scope="col">교수</th>
+
+                    <th class="last" scope="col">강의실</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td class="last" colspan="4" height="30">조회할 자료가
+                      없습니다</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="m-box2" id="ctl_notice_list"></div>
+
+            <div id="site_link_index"></div>
+          </div>
+
+          <div class="index-rightarea02">
+            <div class="icon-box" style="min-height: 230px;">
+              <div class="title-01" style="margin: 19px 19px 0px 19px;"
+                > <span class="site-font-color">Quick Menu</span>
+                <div style="clear: both;'"></div>
+
+                <div
+                  style="border: 1px solid #F1F1F1; margin-top: 15px;"
+                  ></div>
+              </div>
+
+              <div id="quick-menu-index"></div>
+            </div>
+<!-- 중요(즐겨찾기) -->
+            <div class="m-box1"
+              style="margin-top: 20px; position: relative;">
+              <div class="title-01"
+                style="margin: 15px 19px 15px 19px;"> <span
+                class="site-font-color">중요</span></div>
+
+              <div id="impt-list-zone"
+                style="border-top: 1px #d2d2d2 solid;"></div>
+
+              <div id="more-impt-list-btn" onclick="getMyImptList();"
+                style="border-top: 1px dashed #DDDDDD;">더보기+</div>
+
+              <div id="impt-loading">
+                <div id="impt-loadingimg"></div>
+              </div>
+            </div>
+
+            <div class="m-box1" id="new-event-form"
+              style="margin-top: 20px; padding-bottom: 10px; display: none;"
+              >
+              <div class="title-01"
+                style="padding: 15px 19px; margin: auto auto 6px auto; border-bottom: 1px solid #e1e1e1;"
+                > <span class="site-font-color">New Event</span></div>
+
+              <div id="new-event-list"></div>
+
+              <div d="" id="NewEventAddBtn"
+                style="margin: 6px auto 4px auto; text-align: center;"
+                > <img alt="더보기" src="/ilos/images/common/add_view.png"
+                style="cursor: pointer;" /></div>
+            </div>
+
+            <div id="career_link_list_zone"></div>
+
+            <div class="m-box1"
+              style="margin-top: 20px; padding-bottom: 19px;">
+              <div class="title-01"
+                style="margin: 15px 19px 15px 19px;"> <span
+                class="site-font-color">OCW</span>
+                <div class="more"><a
+                  href="/ilos/ocw/courseware_list_form.acl"><img
+                  alt="OCW 목록이동" src="/ilos/images/themes/red/more.png"
+                   /></a></div>
+              </div>
+
+              <div class="box-tab1">
+                <div class="tab1" onclick="ocwTab('1');" val="1">신규</div
+                >
+
+                <div class="tab2" onclick="ocwTab('2');" val="2">인기</div
+                >
+
+                <div class="tab3" onclick="ocwTab('3');" val="3">관심</div
+                >
+              </div>
+
+              <div id="ocw-list"></div>
+            </div>
+
+            <div class="m-box1"
+              style="margin-top: 20px; padding-bottom: 19px;">
+              <div class="title-01"
+                style="margin: 15px 19px 15px 19px;"> <span
+                class="site-font-color">소모임</span>
+                <div class="more"><a
+                  href="/ilos/community/share_group_list_form.acl"
+                  ><img alt="OCW 목록이동"
+                  src="/ilos/images/themes/red/more.png" /></a></div>
+              </div>
+
+              <div class="box-tab2">
+                <div class="tab1" onclick="shareTab('1');" val="1">신규</div
+                >
+
+                <div class="tab2" onclick="shareTab('2');" val="2">인기</div
+                >
+
+                <div class="tab3" onclick="shareTab('3');" val="3"
+                  >나의모임</div>
+              </div>
+
+              <div id="share-list"></div>
+            </div>
+          </div>
+<!-- //End Edit --></div>
+      </div>
+    </div>
+
+    <div id="footerWrap02">
+      <div id="footer">
+        <h2>홈페이지이용 관련 메뉴</h2>
+
+        <div class="left-footer">
+          <div><img alt=""
+            src="/ilos/images/osms/knu/ko/tit_system.png" /></div>
+
+          <div class="copyright">
+            <p>COPYRIGHT KYUNGPOOK NATIONAL UNIVERSITY<br />
+              OFFICE FOR INFORMATION TECHNOLOGY SERVICE</p>
+
+            <p>우) 41566 대구광역시 북구 대학로 80 경북대학교(대구캠퍼스)<br />
+              우) 37224 경상북도 상주시 경상대로 2559 (상주캠퍼스)<br />
+              TEL. 053-950-8702</p>
+<!-- 개인정보 -->
+            <p style="margin-top: 10px;"><span
+              onclick="javascript:popupOpen('http://knu.ac.kr/wbbs/wbbs/contents/index.action?menu_url=siteinfo/policy01&menu_idx=94');"
+              style="font-weight: bold; cursor: pointer; color: #dadada;"
+              >개인정보처리방침</span></p>
+          </div>
+        </div>
+
+        <div class="right-footer">
+          <div class="site-map-box">
+            <h1>교육현황</h1>
+
+            <ul>
+              <li><a href="/ilos/st/main/course_ing_list_form.acl"
+                >개설과목검색</a></li>
+
+              <li><a href="/ilos/ocw/courseware_list_form.acl">OCW</a
+                ></li>
+
+              <li><a
+                href="/ilos/st/schedule/academic_calendar_list_form.acl"
+                >학사일정</a></li>
+            </ul>
+          </div>
+
+          <div class="site-map-box">
+            <h1>커뮤니티</h1>
+
+            <ul>
+              <li><a href="/ilos/community/notice_list_form.acl"
+                >공지사항</a></li>
+
+              <li><a href="/ilos/community/qna_list_form.acl">질의응답</a
+                ></li>
+
+              <li><a href="/ilos/community/material_list_form.acl"
+                >자료실</a></li>
+
+              <li><a href="/ilos/community/share_group_list_form.acl"
+                >소모임</a></li>
+
+              <li><a href="/ilos/community/total_survey_list_form.acl"
+                >설문</a></li>
+            </ul>
+          </div>
+
+          <div class="site-map-box">
+            <h1>소개</h1>
+
+            <ul>
+              <li><a href="/ilos/introduce/introduce.acl">소개</a></li>
+
+              <li><a href="/ilos/guide/guide_main_form.acl">FAQ</a></li
+              >
+            </ul>
+          </div>
+
+          <div class="site-map-box">
+            <h1>마이페이지</h1>
+
+            <ul>
+              <li> <a href="/ilos/mp/myinfo_form.acl">개인정보</a></li>
+
+              <li> <a href="/ilos/mp/course_register_list_form.acl"
+                >수강과목</a></li>
+
+              <li> <a href="/ilos/mp/file_list_form.acl">올린파일함</a></li
+              >
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="footerBottom"></div>
+    </div>
+
+    <div id="dialog-course-eval"></div>
+
+    <div style="position: absolute; z-index:9; top:0; left:0;"></div>
+  </body>
+</html>

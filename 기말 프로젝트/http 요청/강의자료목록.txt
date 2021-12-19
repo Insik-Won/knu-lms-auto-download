@@ -1,0 +1,448 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <table class="bbslist new_bbslist" border="1" summary="공지사항 게시판 목록(제목,작성일,조회 항목)">
+          <caption>게시판 목록</caption>
+          <colgroup>
+            <col style="width: 35px;">
+            <col style="width: 40px;">
+            <col >
+            <col style="width: 48px;">
+            <col style="width: 142px;">
+          </colgroup>
+          <thead>
+            <tr>
+              
+              <th scope="col" title="번호" class="first">번호</th>
+              
+              <th scope="col" title="중요">중요</th>
+              <th scope="col" title="제목">제목</th>
+              <th scope="col" title="첨부">첨부</th>
+              <th class="last" scope="col" title="공개일">공개일</th>
+            </tr>
+          </thead>
+          <tbody>
+        
+        <tr  style="cursor: pointer;">             
+        
+          <td class="number">12</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="6339205"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=6339205&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">Connecting to Processes, Threads</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 147</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('4F7ILQWDNWTIA')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_4F7ILQWDNWTIA">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.11.25 오후 8:00</td>
+        </tr>
+        
+        
+        <tr class="list" style="cursor: pointer;">             
+        
+          <td class="number">11</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="6294573"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=6294573&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">IO Redirection and Pipes</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 125</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('TQBPY3E3NBB3K')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_TQBPY3E3NBB3K">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.11.18 오후 8:00</td>
+        </tr>
+        
+        
+        <tr  style="cursor: pointer;">             
+        
+          <td class="number">10</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="6248637"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=6248637&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">A Programmable Shell</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 145</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('EX3QY2NKYBKDS')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_EX3QY2NKYBKDS">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.11.11 오후 8:00</td>
+        </tr>
+        
+        
+        <tr class="list" style="cursor: pointer;">             
+        
+          <td class="number">9</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="6206008"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=6206008&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">Processes and Programs - Studying sh</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 155</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('5MIIGH6DFB2YA')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_5MIIGH6DFB2YA">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.11.01 오후 8:00</td>
+        </tr>
+        
+        
+        <tr  style="cursor: pointer;">             
+        
+          <td class="number">8</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="6177258"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=6177258&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">Event-Driven Programming (II)</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 173</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('CBKNE3LJWJJC4')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_CBKNE3LJWJJC4">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.10.28 오후 8:00</td>
+        </tr>
+        
+        
+        <tr class="list" style="cursor: pointer;">             
+        
+          <td class="number">7</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="6132759"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=6132759&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">Event-Driven Programming (I)</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 173</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('DTCPV6LERSAI4')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_DTCPV6LERSAI4">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.10.21 오후 8:00</td>
+        </tr>
+        
+        
+        <tr  style="cursor: pointer;">             
+        
+          <td class="number">6</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="6041723"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=6041723&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">Terminal Control and Signals</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 155</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('7GBSQNP2QVQHA')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_7GBSQNP2QVQHA">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.10.07 오후 8:00</td>
+        </tr>
+        
+        
+        <tr class="list" style="cursor: pointer;">             
+        
+          <td class="number">5</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="5989992"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=5989992&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">Connection Control : stty</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 141</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('TA2AVAEQIZ2Y2')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_TA2AVAEQIZ2Y2">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.09.30 오후 8:00</td>
+        </tr>
+        
+        
+        <tr  style="cursor: pointer;">             
+        
+          <td class="number">4</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="5940093"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=5940093&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">File Systems : writing pwd</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 157</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('FGT5ILTQJDNDA')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_FGT5ILTQJDNDA">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.09.23 오후 8:00</td>
+        </tr>
+        
+        
+        <tr class="list" style="cursor: pointer;">             
+        
+          <td class="number">3</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="5905018"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=5905018&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">Directories and File Properties - Looking through ls</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 178</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('L66XQTUKNXASI')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_L66XQTUKNXASI">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.09.16 오후 8:00</td>
+        </tr>
+        
+        
+        <tr  style="cursor: pointer;">             
+        
+          <td class="number">2</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="5867069"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=5867069&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">Users, Files, and the Manual</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 227</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('BEZJ2US4EBIPU')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_BEZJ2US4EBIPU">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.09.09 오후 8:00</td>
+        </tr>
+        
+        
+        <tr class="list" style="cursor: pointer;">             
+        
+          <td class="number">1</td>
+        
+          <td class="center impt impt_off" title="중요글 추가" impt_seq="5837296"></td>
+          <td class="left" style="" onclick="pageMove('/ilos/st/course/lecture_material_view_form.acl?ARTL_NUM=5837296&amp;SCH_KEY=&SCH_VALUE=&display=1&start=1', event); return false;">
+            <a class="site-link" title="상세보기">
+              <div class="subjt_top">Unix System Programming - The Big Picture</div>
+              <div class="subjt_bottom">
+                <span>류은경</span>
+                <img style="margin: 0px 3px 1px 3px;" src="/ilos/images/bar2.png">
+                <span>조회 244</span>
+              </div>
+            </a>
+          </td>
+               
+          <td>          
+            <div class="img_div" style="">
+            
+              
+                
+                <img class="download_icon" onclick="downloadClick('GW3JBZZMXSSV6')" src="/ilos/images/common/material/download.png" alt="일괄다운로드" title="일괄다운로드">
+                <div id="file_list_GW3JBZZMXSSV6">
+                </div>
+                
+              
+            
+            </div>
+          </td>
+        
+          <td class="number">2021.09.03 오전 8:04</td>
+        </tr>
+        
+        
+        
+        </tbody>
+      </table>
