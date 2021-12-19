@@ -52,7 +52,7 @@
 │   ├── resources       # 단위 테스트에 사용할 리소스 파일
 │   │   └── ...
 │   ├── test_knuapi.c   # knuapi 라이브러리를 단위 테스트하는 파일
-│   ├── test_knustring.c # knustring 라이브러리를 단위 테스트하는 파일
+│   ├── test_knustring.c# knustring 라이브러리를 단위 테스트하는 파일
 │   ├── test_knuutils.c # knuutils 라이브러리를 단위 테스트하는 파일
 │   └── test_util.c     # test_util.h 정의
 └── 기말 프로젝트
