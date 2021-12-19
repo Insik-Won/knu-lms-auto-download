@@ -8,7 +8,7 @@
 
 - 운영체제: Linux Ubuntu 20.04 or WSL2 Ubuntu 20.04
 
-# 사용 스택
+## 사용 스택
 
 - vscode : 통합 개발 환경
 - make, cmake : 프로젝트 빌드 툴
@@ -23,7 +23,7 @@
 - gunzip, unzip 명령어: 압축파일 해제
 
 
-# 디렉토리 구조
+## 디렉토리 구조
 
 ```shell
 .  
@@ -85,7 +85,7 @@ unset cwd
 
 (미구현)
 
-### 실행방법 : 테스트
+## 실행방법 : 테스트
 
 ```shell
 ./knu-lms-auto-download/build/bin/test
