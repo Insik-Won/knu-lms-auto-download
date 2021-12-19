@@ -3,32 +3,36 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
   ${CMAKE_CURRENT_SOURCE_DIR}/*.c
 )
 
-add_library(word STATIC ${SRC_FILES})
+add_library(knudef STATIC knudef.c)
+target_include_directories(knudef PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+target_compile_options(knudef PRIVATE -Wall -Werror)
 
-target_include_directories(word PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+add_library(knuutils STATIC knuutils.c knustring.c)
+target_include_directories(knuutils PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+target_compile_options(knuutils PRIVATE -Wall -Werror)
 
-target_compile_options(word PRIVATE -Wall -Werror)
+add_library(knuapi STATIC knuapi.c)
+target_include_directories(knuapi PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+target_compile_options(knuapi PRIVATE -Wall -Werror)
 
-target_link_libraries(word PRIVATE curl)
+add_library(knulms STATIC knulms.c)
+target_include_directories(knulms PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+target_compile_options(knulms PRIVATE -Wall -Werror)
 
+find_package(LibXml2 REQUIRED)
+target_link_libraries(knuapi PUBLIC knudef knuutils curl LibXml2::LibXml2)
 
-#[[
+target_link_libraries(knulms PUBLIC knudef)
+target_link_libraries(knulms PRIVATE knuapi knuutils curl)
 
-# word 를 C++ 17 로 컴파일
-target_compile_features(word PRIVATE cxx_std_17)
+include (FetchContent)
 
-# FetchContent 를 사용하기 위해 include.
-include(FetchContent)
-
-# fmt 라이브러리를 불러온다.
 FetchContent_Declare(
-  Fmt
-  GIT_REPOSITORY "https://github.com/fmtlib/fmt"
-  GIT_TAG "7.1.3"
-  )
-FetchContent_MakeAvailable(Fmt)
+  Json
+  GIT_REPOSITORY "https://github.com/json-c/json-c"
+  GIT_TAG "json-c-0.15-20200726"
+)
+FetchContent_MakeAvailable(Json)
 
-# word 에 링크
-target_link_libraries(word PRIVATE fmt)
-
-]]
+target_link_libraries(knuapi PRIVATE json-c)
+target_link_libraries(knulms PRIVATE json-c)

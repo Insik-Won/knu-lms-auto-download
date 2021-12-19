@@ -1,0 +1,151 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "bin/json_parse"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"build/_deps/json-src/apps/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 116,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 117,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 108,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 109,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 110,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g  "
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "/home/insikwon/workspace/knu-lms-auto-download/build/_deps/json-src/apps/PUBLIC"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/insikwon/workspace/knu-lms-auto-download"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/insikwon/workspace/knu-lms-auto-download/build/_deps/json-src"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/insikwon/workspace/knu-lms-auto-download/build/_deps/json-build"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "json-c::@1f73e43ed239fe3d59ae"
+		}
+	],
+	"id" : "json_parse::@c77dfd657ed5d2c485a3",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-g",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-rdynamic",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/home/insikwon/workspace/knu-lms-auto-download/build/lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "../../../lib/libjson-c.so.5.1.0",
+				"role" : "libraries"
+			}
+		],
+		"language" : "C"
+	},
+	"name" : "json_parse",
+	"nameOnDisk" : "json_parse",
+	"paths" : 
+	{
+		"build" : "_deps/json-build/apps",
+		"source" : "build/_deps/json-src/apps"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "build/_deps/json-src/apps/json_parse.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}
