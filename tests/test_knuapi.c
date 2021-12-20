@@ -103,7 +103,7 @@ void test_knuapi_get_student_number(void** state) {
 void test_knuapi_get_subjects(void** state) {
   const char* cookie = (const char*)*state;
 
-  const char* expected_names[] = {" 대학글쓰기 (001) ", " 서양의역사와문화 (007) ", " 시스템프로그래밍 (003) ", " 자료구조 (011) ", " 자료구조응용 (003) ", " 자료구조프로그래밍 (002) ", " 컴퓨터망프로그래밍 (001) ", " 2021년                  경북대학교 장애인식개선 교육(학생) (39) "};
+  const char* expected_names[] = {" 대학글쓰기 (001) ", " 서양의역사와문화 (007) ", " 시스템프로그래밍 (003) ", " 자료구조 (011) ", " 자료구조응용 (003) ", " 자료구조프로그래밍 (002) ", " 컴퓨터망프로그래밍 (001) ", " 2021년 경북대학교 장애인식개선 교육(학생) (39) "};
   const char* expected_keys[] = {"A20213CLTR205001", "A20213CLTR043007", "A20213ELEC462003", "A20213COME331011", "A20213COMP216003", "A20213ITEC423002", "A20213GLSO217001", "N2021B2021sup3939"};
 
   KnuString* subject_keys = NULL;
@@ -138,22 +138,42 @@ void test_knuapi_get_materials(void** state) {
   const char* cookie = (const char*)*state;
   const char* prepared_key = "A20213ELEC462003";
 
+  const char* expected_ids[] = {"6339205", "6294573", "6248637", "6206008", "6177258", "6132759", "6041723", "5989992", "5940093", "5905018", "5867069", "5837296", };
+  const char* expected_titles[] = {"Connecting to Processes, Threads", "IO Redirection and Pipes", "A Programmable Shell", "Processes and Programs - Studying sh", "Event-Driven Programming (II)", "Event-Driven Programming (I)", "Terminal Control and Signals", "Connection Control : stty", "File Systems : writing pwd", "Directories and File Properties - Looking through ls", "Users, Files, and the Manual", "Unix System Programming - The Big Picture", };
+
   Material* materials = NULL;
   size_t size = 0;
   knuapi_get_materials(getenv("STUDENT_NUMBER"), prepared_key, &materials, &size, cookie);
 
   for (int i = 0; i < size; i++) {
-    printf("id[%d] : %s\n", i, materials[i].id.value);
-    printf("title[%d] : %s\n", i, materials[i].title.value);
-    printf("files_id[%d] : %s\n", i, materials[i].files_id.value);
+   assert_string_equal(expected_ids[i], materials[i].id.value);
+   assert_string_equal(expected_titles[i], materials[i].title.value);
   }
 
   for (int i = 0; i < size; i++) {
     KnuString_destroy(&materials[i].id);
     KnuString_destroy(&materials[i].title);
-    KnuString_destroy(&materials[i].files_id);
   }
   free(materials);
+}
+
+void test_knuapi_donload_material(void** state) {
+  const char* cookie = (const char*)*state;
+
+  const char* prepared_subject_key = "A20213ELEC462003";
+  const char* prepared_material_id = "6339205";
+  char expected_filename[FILENAME_MAX];
+  strcpy(expected_filename, getenv("RES_PATH"));
+  strcat(expected_filename, "/materials.zip");
+
+  char tmp_filename[FILENAME_MAX] = "/tmp/tmpXXXXXX";
+  assert_int_equal(make_tmpfile(tmp_filename), 0);
+
+  int result = knuapi_download_material_files(tmp_filename, NULL, prepared_material_id, prepared_subject_key, getenv("STUDENT_NUMBER"), cookie);
+  assert_int_equal(result, 0);
+
+  //assert_filename_equal(tmp_filename, expected_filename); it differs by time ...
+  remove(tmp_filename);
 }
 
 const struct CMUnitTest* test_knuapi() {
@@ -165,6 +185,7 @@ const struct CMUnitTest* test_knuapi() {
     cmocka_unit_test_setup_teardown(test_knuapi_get_subjects, prepare_user_and_cookie, clean_user_and_cookie),
     cmocka_unit_test_setup_teardown(test_knuapi_set_subject, prepare_user_and_cookie, clean_user_and_cookie),
     cmocka_unit_test_prestate_setup_teardown(test_knuapi_get_materials, prepare_user_and_subject, clean_user_and_cookie, "A20213ELEC462003"),
+    cmocka_unit_test_prestate_setup_teardown(test_knuapi_donload_material, prepare_user_and_subject, clean_user_and_cookie, "A20213ELEC462003"),
     {NULL, NULL, NULL, NULL, NULL},
   }; 
 

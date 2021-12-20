@@ -4,8 +4,7 @@
 #include <stddef.h>
 #include <knudef.h>
 
-#define KNULMS_HOSTNAME "https://lms.knu.ac.kr"
-#define GET_KNULMS_URL(subpath) KNULMS_HOSTNAME subpath
+
 
 /*
  * initate global knulms library

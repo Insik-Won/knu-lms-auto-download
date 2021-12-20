@@ -39,7 +39,10 @@
 #define SET_SUBJECT_REFERER "https://lms.knu.ac.kr/ilos/main/member/login_form.acl"
 #define GET_MATERIAL_URL "https://lms.knu.ac.kr/ilos/st/course/lecture_material_list.acl"
 #define GET_MATERIAL_REFERER "https://lms.knu.ac.kr/ilos/st/course/lecture_material_list_form.acl"
-
+#define GET_MATERIAL_DOWNLOAD_LINK_URL "https://lms.knu.ac.kr/ilos/co/list_file_list2.acl"
+#define GET_MATERIAL_DOWNLOAD_LINK_REFERER "https://lms.knu.ac.kr/ilos/st/course/lecture_material_list_form.acl"
+#define MATERIAL_DOWNLOAD_LINK_URL "https://lms.knu.ac.kr/ilos/pf/course/lecture_material_list_zip_download2.acl"
+#define MATERIAL_DOWNLOAD_LINK_REFERER "https://lms.knu.ac.kr/ilos/st/course/lecture_material_view_form.acl"
 
 void knuapi_global_init() {
   curl_global_init(CURL_GLOBAL_DEFAULT);
@@ -379,6 +382,7 @@ cleanup_knuapi_get_student_number:
     curl_slist_free_all(options.headers);
   }
   remove(output_filename);
+  KnuString_destroy(&privacy);
 
   return return_value;
 }
@@ -443,6 +447,8 @@ int knuapi_get_subject(KnuString** subject_name_list, KnuString** subject_key_li
     KnuString_init(&key_list[i]);
     KnuString_appendString(&name_list[i], (char*)innerText);
     KnuString_appendString(&key_list[i], (char*)kj);
+    KnuString_collapseWhitespace(&name_list[i]);
+    KnuString_collapseWhitespace(&key_list[i]);
 
     xmlFree(kj);
     xmlFree(innerText);
@@ -528,9 +534,8 @@ cleanup_knuapi_login:
 int knuapi_get_materials(const char* student_number, const char* subject_key, Material** material_list, size_t* size, const char* cookie_filename) {
   int return_value = 0;
 
-  KnuString ids, titles, files_ids;
+  KnuString ids, titles;
   KnuString_init(&titles);
-  KnuString_init(&files_ids);
   KnuString_init(&ids);
 
   HttpRequestOptions options;
@@ -556,20 +561,17 @@ int knuapi_get_materials(const char* student_number, const char* subject_key, Ma
   }
 
   normazlie_html(output_filename);
-  css_select(output_filename, "-s\n", "body > table > tbody > tr:nth-child(1) > td.center.impt.impt_off", &ids);
+  css_select(output_filename, "-s\n", "body > table > tbody > tr > td.center.impt.impt_off", &ids);
   css_select(output_filename, "-s\n", "body > table > tbody > tr > td.left > div.subjt_top", &titles);
-  css_select(output_filename, "-s\n", "body > table > tbody > tr > td:nth-child(4) > div > div", &files_ids);
   
-  KnuString *id_list, *title_list, *files_id_list;
+  KnuString *id_list, *title_list;
   int count = KnuString_tokenizeToArray(&ids, '\n', &id_list);
   KnuString_tokenizeToArray(&titles, '\n', &title_list);
-  KnuString_tokenizeToArray(&files_ids, '\n', &files_id_list);
 
   Material* materials = malloc(sizeof(*materials) * count);
   for (int i = 0; i < count; i++) {
     KnuString_init(&materials[i].id);
     KnuString_init(&materials[i].title);
-    KnuString_init(&materials[i].files_id);
   }
 
   xmlDocPtr doc = NULL;
@@ -579,6 +581,7 @@ int knuapi_get_materials(const char* student_number, const char* subject_key, Ma
     element = xmlDocGetRootElement(doc);
     xmlChar* impt_seq = xmlGetProp(element, (xmlChar*)"impt_seq");
     KnuString_appendString(&materials[i].id, (char*)impt_seq);
+    KnuString_collapseWhitespace(&materials[i].id);
     xmlFree(impt_seq);
     xmlFreeDoc(doc);
   }
@@ -587,15 +590,8 @@ int knuapi_get_materials(const char* student_number, const char* subject_key, Ma
     element = xmlDocGetRootElement(doc);
     xmlChar* innerText = xmlNodeGetContent(element);
     KnuString_appendString(&materials[i].title, (char*)innerText);
+    KnuString_collapseWhitespace(&materials[i].title);
     xmlFree(innerText);
-    xmlFreeDoc(doc);
-  }
-  for (int i = 0; i < count; i++) {
-    doc = xmlParseDoc((xmlChar*)files_id_list[i].value);
-    element = xmlDocGetRootElement(doc);
-    xmlChar* id = xmlGetProp(element, (xmlChar*)"id");
-    KnuString_appendString(&materials[i].files_id, strrchr((char*)id, '_') + 1);
-    xmlFree(id);
     xmlFreeDoc(doc);
   }
 
@@ -605,14 +601,11 @@ int knuapi_get_materials(const char* student_number, const char* subject_key, Ma
   for (int i = 0; i < count; i++) {
     KnuString_destroy(&id_list[i]);
     KnuString_destroy(&title_list[i]);
-    KnuString_destroy(&files_id_list[i]);
   }
   free(id_list);
   free(title_list);
-  free(files_id_list);
   KnuString_destroy(&ids);
   KnuString_destroy(&titles);
-  KnuString_destroy(&files_ids);
 
 cleanup_knuapi_get_student_number:
   if (options.headers) {
@@ -621,6 +614,129 @@ cleanup_knuapi_get_student_number:
   remove(output_filename);
 
   return return_value;
+}
+
+/**
+ * @brief get the id of material files with cookie.
+ * 
+ * @param material_files_id a KnuString to contain the material files id
+ * @param material_id the id of material.
+ * @param cookie_filename the name of file that contains coookie from libcurl
+ * @return 0 if succeed, otherwise, non-zero value.
+ */
+int knuapi_get_material_download_link(KnuString* material_download_link, const char* student_number, const char* subject_key, const char* material_files_id, const char* cookie_filename) {
+
+  HttpRequestOptions options;
+  memset(&options, 0, sizeof(options));
+
+  KnuString download_links;
+  KnuString_init(&download_links);
+
+  xmlDocPtr doc = NULL;
+  xmlNodePtr element = NULL;
+  xmlChar* onclick = NULL;
+
+  int result;
+
+  options.headers = append_default_headers(options.headers);
+  options.headers = curl_slist_append(options.headers, TYPE2_ACCEPT);
+  options.headers = curl_slist_append(options.headers, TYPE1_SEC_FETCH_DEST);
+  options.headers = curl_slist_append(options.headers, TYPE1_SEC_FETCH_MODE);
+  options.headers = curl_slist_append(options.headers, TYPE1_X_REQUESTED_WITH);
+
+  options.cookie_file = cookie_filename;
+  options.referer = GET_MATERIAL_DOWNLOAD_LINK_REFERER;
+  options.follow_redirects = 0L;
+
+  char output_filename[] = "/tmp/tmpXXXXXX";
+  if (make_tmpfile(output_filename) != 0) goto throw;
+
+  result = knuapi_http_request(GET_MATERIAL_DOWNLOAD_LINK_URL, &options, output_filename, 
+                                   "ud=%s&ky=%s&CONTENT_SEQ=%s&pf_st_flag=2&encoding=utf-8",
+                                   getenv("STUDENT_NUMBER"), subject_key, material_files_id);
+  if (result != 0) goto throw;
+
+  normazlie_html(output_filename);
+  result = css_select(output_filename, NULL, "body > div > div.list_div > div > div:nth-child(1) > div.file_list_nm > a", &download_links);
+
+  doc = xmlParseDoc((xmlChar*)download_links.value);
+  if (!doc) goto throw;
+
+  element = xmlDocGetRootElement(doc);
+  if (!element) goto throw;
+
+  onclick = xmlGetProp(element, (xmlChar*)"onclick");
+  if (!onclick) goto throw;
+
+  const char* prefix = "location.href='";
+
+  char* link = strstr((char*)onclick, prefix) + strlen(prefix);
+  if (!link) goto throw;
+
+  *strchr(link, '\'') = '\0';
+
+  KnuString_empty(material_download_link);
+  KnuString_appendString(material_download_link, KNULMS_HOSTNAME);
+  KnuString_appendString(material_download_link, link);
+
+  xmlFree(onclick);
+  xmlFreeDoc(doc);
+  curl_slist_free_all(options.headers);
+  KnuString_destroy(&download_links);
+  remove(output_filename);
+  return 0;
+
+throw:
+  if (onclick) xmlFree(onclick);
+  if (doc) xmlFreeDoc(doc);
+  if (options.headers) curl_slist_free_all(options.headers);
+  KnuString_destroy(&download_links);
+  remove(output_filename);
+
+  return -1;
+}
+
+/**
+ * @brief download file with id of material files and cookie. ignore the files that match to glob pattern.
+ * 
+ * @param cookie_filename the name of file that contains coookie from libcurl
+ * @return 0 if succeed, otherwise, non-zero value.
+ */
+int knuapi_download_material_files(const char* download_filename, const char* glob_pattern, const char* material_id, const char* subject_key, const char* student_number, const char* cookie_filename) {
+  HttpRequestOptions options;
+  memset(&options, 0, sizeof(options));
+
+  char* download_link = NULL; 
+  char* referer = NULL;
+  int result;
+
+  download_link = asprintf("%s?CONTENT_SEQ=%s&ky=%s&ud=%s&pf_st_flag=2", MATERIAL_DOWNLOAD_LINK_URL, material_id, subject_key, student_number);
+  referer =  asprintf("%s?ART_NUM=%s&SCH_KEY=&SCH_VALUE=&displact=1&start=1", MATERIAL_DOWNLOAD_LINK_REFERER, material_id);
+
+  options.headers = append_default_headers(options.headers);
+  options.headers = curl_slist_append(options.headers, TYPE1_ACCEPT);
+  options.headers = curl_slist_append(options.headers, "Sec-Fetch-Dest: iframe");
+  options.headers = curl_slist_append(options.headers, TYPE2_SEC_FETCH_MODE);
+  options.headers = curl_slist_append(options.headers, TYPE2_SEC_FETCH_USER);
+  options.headers = curl_slist_append(options.headers, TYPE2_UPGRADE_INSECURE_REQUESTS);
+
+  options.cookie_file = cookie_filename;
+  options.referer = referer;
+  options.follow_redirects = 1L;
+
+  result = knuapi_http_request(download_link, &options, download_filename, NULL);
+  if (result != 0) goto throw;
+  
+  curl_slist_free_all(options.headers);
+  free(download_link);
+  return 0;
+
+throw:
+  if (options.headers) curl_slist_free_all(options.headers);
+  if (referer) free(referer);
+  if (download_link) free(download_link);
+
+  return -1;
 }
 
 

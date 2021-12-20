@@ -118,56 +118,40 @@ int gunzip(const char* source, const char* destination) {
   return 1;
 }
 
+#define NORMALIZE_COMMAND "sed \"s/<script.*<\\/script>//g;/<script/,/<\\/script>/{/<script/!{/<\\/script>/!d}};s/<script.*//g;s/.*<\\/script>//g\" | hxnormalize -x | tr -d \"\\n\"" 
 /*
  * remove scripts tag from html file and normaize to well-formed xml
  */
 int html_normalize(const char* source, const char* destination) {
-  int pid = fork();
-  if (pid == 0) {
-    int pipes1[2];
-    int pipes2[2];
-    pipe(pipes1);
-    pipe(pipes2);
+  char* command = NULL;
+  FILE* process = NULL;
+  FILE* output = NULL;
+  char buffer[BUFSIZ];
+  size_t len;
 
-    pid = fork();
-    if (pid == 0) {
-      close(pipes2[0]);
-      close(pipes2[1]);
-      close(pipes1[0]);
-      int infd = open(source, O_RDONLY);
-      dup2(infd, 0);
-      dup2(pipes1[1], 1);
-      execlp("sed", "sed", "s/<script.*<\\/script>//g;/<script/,/<\\/script>/{/<script/!{/<\\/script>/!d}};s/<script.*//g;s/.*<\\/script>//g", NULL);
-      perror("excelp, sed error");
-    }
+  command = asprintf("<%s %s", source, NORMALIZE_COMMAND);
+  if (!command) goto html_normalize_fail;
 
-    pid = fork();
-    if (pid == 0) {
-      close(pipes1[1]);
-      close(pipes2[0]);
-      dup2(pipes1[0], 0);
-      dup2(pipes2[1], 1);
-
-      execlp("hxnormalize", "hxnormalize", "-x", NULL);
-      perror("execlp hxnormalize error");
-    }
-
-    close(pipes1[0]);
-    close(pipes1[1]);
-    close(pipes2[1]);
-    int outfd = open(destination, O_WRONLY | O_TRUNC | O_CREAT, 0600);
-    dup2(pipes2[0], 0);
-    dup2(outfd, 1);
-
-    execlp("tr", "tr", "-d", "\\n", NULL);
-    perror("excelp tr error");
+  output = fopen(destination, "w");
+  if (!output) goto html_normalize_fail;
   
+  process = popen(command, "r");
+  if (!process) goto html_normalize_fail;
+
+  while ((len = fread(buffer, sizeof(*buffer), sizeof(buffer), process)) > 0) {
+    fwrite(buffer, sizeof(*buffer), len, output);
   }
 
-  wait(NULL);
-  wait(NULL);
-  
+  free(command);
+  fclose(output);
+  pclose(process);
   return 1;
+
+html_normalize_fail:
+  if (command) free(command);
+  if (output) fclose(output);
+  if (process) pclose(process);
+  return 0;
 }
 
 /*
@@ -191,10 +175,30 @@ int css_select(const char* filename, const char* option, const char* pattern, Kn
       execlp("hxselect", "hxselect", pattern, NULL);
     perror("excelp, hxselect error");
   }
+  wait(NULL);
 
   close(pipes[1]);
   KnuString_empty(str);
   KnuString_readAllFromFd(str, pipes[0]);
 
   return !KnuString_isEmpty(str);
+}
+
+int unzip(const char* source, const char* directory, const char* include_glob, const char* exclude_glob) {
+  pid_t pid = fork();
+  if (pid == 0) {
+    if (include_glob && exclude_glob)
+      execlp("unzip", "unzip", "-q", "-o", source, "-d", directory, include_glob,"-x", exclude_glob,  NULL);
+    else if (include_glob)
+      execlp("unzip", "unzip", "-q", "-o", source, "-d", directory, include_glob, NULL);
+    else if (exclude_glob)
+      execlp("unzip", "unzip", "-q", "-o", source, "-d", directory, "-x", exclude_glob, NULL);
+    else
+      execlp("unzip", "unzip", "-q", "-o", source, "-d", directory,NULL);
+
+    perror("excelp unzip error");
+  }
+  wait(NULL);
+
+  return 1;
 }

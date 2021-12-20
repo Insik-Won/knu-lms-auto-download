@@ -158,7 +158,7 @@ void assert_file_equal(FILE* file1, FILE* file2) {
   }
 }
 
-void assert_filename_equal(const char* filename2, const char* filename1) {
+void assert_filename_equal(const char* filename1, const char* filename2) {
   FILE* file1 = fopen(filename1, "r");
   FILE* file2 = fopen(filename2, "r");
   assert_non_null(file1);

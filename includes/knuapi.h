@@ -5,6 +5,9 @@
 #include <knuutils.h>
 #include <curl/curl.h>
 
+#define KNULMS_HOSTNAME "https://lms.knu.ac.kr"
+#define GET_KNULMS_URL(subpath) KNULMS_HOSTNAME subpath
+
 /**
  * @brief initiate knuapi library
  */
@@ -31,7 +34,6 @@ typedef struct _HttpRequestOptions {
 typedef struct _Material {
   KnuString id;
   KnuString title;
-  KnuString files_id;
 } Material;
 
 /**
@@ -113,7 +115,7 @@ int knuapi_get_materials(const char* student_number, const char* subject_key, Ma
  * @param cookie_filename the name of file that contains coookie from libcurl
  * @return 0 if succeed, otherwise, non-zero value.
  */
-int knuapi_get_material_files_id(KnuString* material_files_id, const char* material_id, const char* cookie_filename);
+int knuapi_get_material_download_link(KnuString* material_download_link, const char* student_number, const char* subject_key, const char* material_files_id, const char* cookie_filename);
 
 /**
  * @brief download file with id of material files and cookie. ignore the files that match to glob pattern.
@@ -121,7 +123,7 @@ int knuapi_get_material_files_id(KnuString* material_files_id, const char* mater
  * @param cookie_filename the name of file that contains coookie from libcurl
  * @return 0 if succeed, otherwise, non-zero value.
  */
-int knuapi_download_material_files(const char* downlaod_filename, const char* glob_pattern, const char* material_files_id, const char* cookie_filename);
+int knuapi_download_material_files(const char* downlaod_filename, const char* glob_pattern, const char* material_id, const char* subject_key, const char* stduent_number, const char* cookie_filename);
 
 
 

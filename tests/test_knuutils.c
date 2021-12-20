@@ -6,6 +6,7 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <unistd.h>
+#include <dirent.h>
 
 #include <knuutils.h>
 #include <test_util.h>
@@ -92,6 +93,49 @@ void test_css_select(void** state) {
   KnuString_destroy(&result);
 }
 
+void test_unzip(void** state) {
+  char** filenames = (char**)*state;
+  char* temp_filename = filenames[1];
+
+  char directory[] = "/tmp/tmpXXXXXX";
+  mkdtemp(directory);
+
+  const char* unwelcomes[] = {"11. Connecting to Process Near and Far Servers and Sockets (1).pdf", "14. Threads - Concurrent Functions.pdf", "ch14.zip"};
+  const char* welcomes[] = {"ch11.zip"};
+
+  unzip(temp_filename, directory, "*.zip", "ch14.zip");
+
+  DIR* dir = opendir(directory);
+  struct dirent* entry;
+  char full_path1[sizeof(directory) + NAME_MAX + 1];
+  char full_path2[sizeof(directory) + NAME_MAX + 1];
+
+  while ((entry = readdir(dir))) {
+    if (entry->d_type == DT_DIR)
+      continue;
+
+    for (int i = 0; i < sizeof(unwelcomes)/sizeof(*unwelcomes); i++)
+      assert_string_not_equal(entry->d_name, unwelcomes[i]);
+    
+    int matched = -1;
+    for (int i = 0; i < sizeof(welcomes)/sizeof(*welcomes); i++) {
+      if (strcmp(entry->d_name, welcomes[i]) == 0) {
+        matched = i;
+        break;
+      }
+    }
+    assert_int_not_equal(matched, -1);
+    
+    strcpy(full_path1, directory);
+    strcpy(full_path2, getenv("RES_PATH"));
+    strcat(full_path1, "/");
+    strcat(full_path2, "/");
+    strcat(full_path1, entry->d_name);
+    strcat(full_path2, entry->d_name);
+    assert_filename_equal(full_path1, full_path2);
+  }
+}
+
 const struct CMUnitTest* test_knuutils() {
   static const struct CMUnitTest tests[] = {
     cmocka_unit_test(test_asprintf),
@@ -99,6 +143,7 @@ const struct CMUnitTest* test_knuutils() {
     cmocka_unit_test_prestate_setup_teardown(test_gunzip, prepare_file, clean_file, "gzip.jpg.gz"),
     cmocka_unit_test_prestate_setup_teardown(test_html_normalize, prepare_file, clean_file, "naver.html"),
     cmocka_unit_test(test_css_select),
+    cmocka_unit_test_prestate_setup_teardown(test_unzip, prepare_file, clean_file, "materials.zip"),
     {NULL, NULL, NULL, NULL, NULL},
   }; 
 

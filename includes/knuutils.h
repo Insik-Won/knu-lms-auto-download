@@ -32,6 +32,8 @@ int make_tmpfile(char filename[]);
 int copy_file(const char* source, const char* destination);
 
 
+int unzip(const char* source, const char* directory, const char* include_glob, const char* exclude_glob);
+
 /*
  * unzip gzip file into its parent directory 
  */ 

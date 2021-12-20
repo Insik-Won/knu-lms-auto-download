@@ -71,6 +71,8 @@ int KnuString_readAllFromFilename(KnuString* knustr, const char* filename);
 
 int KnuString_substring(KnuString* knustr, int start, int end, KnuString* result);
 
+int KnuString_collapse(KnuString* knustr, char to_collapse);
+int KnuString_collapseWhitespace(KnuString* knustr);
 
 /**
  * @brief tokenize KnuString with '\0'. at last, resotre the KnuString. if you want stop, give save_ptr as NULL.

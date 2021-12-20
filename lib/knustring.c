@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <unistd.h>
 
 #include "knustring.h"
@@ -220,5 +221,54 @@ int KnuString_substring(KnuString* knustr, int start, int end, KnuString* result
   knustr->value[end] = replaced;
 
   return 1;
+}
+
+int KnuString_collapse(KnuString* knustr, char to_collapse) {
+  int i;
+  for (i = 0; i < knustr->length; i++) {
+    if (knustr->value[i] == to_collapse) {
+      int idx = i;
+      
+      while (knustr->value[idx] == to_collapse)
+        idx++;
+
+      if (idx == i)
+        continue;
+      
+      int gap = idx - i - 1;
+      for (; idx < knustr->length; idx++) {
+        knustr->value[idx - gap] = knustr->value[idx];
+      }
+      knustr->value[idx - gap] = '\0';
+      knustr->length -= gap;
+    }
+  }
+
+  return 0;
+}
+
+int KnuString_collapseWhitespace(KnuString* knustr) {
+  int i;
+  for (i = 0; i < knustr->length; i++) {
+    if (isspace(knustr->value[i])) {
+      int idx = i;
+      
+      while (isspace(knustr->value[idx]))
+        idx++;
+
+      if (idx == i)
+        continue;
+      
+      int gap = idx - i - 1;
+      knustr->value[idx - 1] = ' ';
+      for (; idx < knustr->length; idx++) {
+        knustr->value[idx - gap] = knustr->value[idx];
+      }
+      knustr->value[idx - gap] = '\0';
+      knustr->length -= gap;
+    }
+  }
+
+  return 0; 
 }
 

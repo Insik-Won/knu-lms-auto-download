@@ -136,6 +136,32 @@ static void test_KnuString_tokenize(void** state) {
   assert_int_equal(i, sizeof(origin_text_tokenized)/sizeof(*origin_text_tokenized));  
 }
 
+static void test_KnuString_collapse(void** state) {
+  KnuString* str = (KnuString*)(*state);
+
+  const char* prepared = "H e    llo World  !";
+  const char* expected = "H e llo World !";
+
+  KnuString_appendString(str, prepared);
+  KnuString_collapse(str, ' ');
+
+  assert_string_equal(str->value, expected);
+  assert_int_equal(str->length, strlen(expected));
+}
+
+static void test_KnuString_collapseWhitespace(void** state) {
+  KnuString* str = (KnuString*)(*state);
+
+  const char* prepared = "H e  \n\t  llo World \r\n !";
+  const char* expected = "H e llo World !";
+
+  KnuString_appendString(str, prepared);
+  KnuString_collapseWhitespace(str);
+
+  assert_string_equal(str->value, expected);
+  assert_int_equal(str->length, strlen(expected));
+}
+
 static void test_KnuString_destroy(void** state) {
   KnuString* str = (KnuString*)*state;
 
@@ -158,6 +184,8 @@ const struct CMUnitTest* test_knustring() {
     cmocka_unit_test_setup_teardown(test_KnuString_readAllFromFile, prepare_KnuString, clean_KnuString),
     cmocka_unit_test_setup_teardown(test_KnuString_destroy, prepare_KnuString, clean_KnuString),
     cmocka_unit_test_setup_teardown(test_KnuString_tokenize, prepare_KnuString, clean_KnuString),
+    cmocka_unit_test_setup_teardown(test_KnuString_collapse, prepare_KnuString, clean_KnuString),
+    cmocka_unit_test_setup_teardown(test_KnuString_collapseWhitespace, prepare_KnuString, clean_KnuString),
     {NULL, NULL, NULL, NULL, NULL},
   };
 
