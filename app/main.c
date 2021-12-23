@@ -370,7 +370,7 @@ int match_post_title(const char* material_name, int idx, size_t size) {
   return strstr(material_name, post_title) != NULL;
 }
 int match_post_number(const char* material_name, int idx, size_t size) {
-  int num = size - idx + 1;
+  int num = size - idx;
   return num == post_number;
 }
 int match_post_order(const char* material_name, int idx, size_t size) {
