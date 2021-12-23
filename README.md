@@ -68,10 +68,16 @@ $ tree
 ## 설치방법
 ```shell
 git clone https://github.com/Insik-Won/knu-lms-auto-download.git
-chmod -x ./install.sh
+chmod +x ./install.sh
 sudo ./install.sh
 
-knudown
+knudown [options] [subject_name] [output_directory]
+```
+
+### 삭제방법
+```shell
+chmod +x ./uninstall.sh
+sudo ./uninstall.sh
 ```
 
 ## 빌드방법
