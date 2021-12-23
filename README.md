@@ -65,6 +65,15 @@ $ tree
     └── 프로젝트 보고서.docx  # 프로젝트 보고서 - 프로젝트 개요, 상세구조 및 동작 흐름도, 결과, 참고자료
 ```
 
+## 설치방법
+```shell
+git clone https://github.com/Insik-Won/knu-lms-auto-download.git
+chmod -x ./install.sh
+sudo ./install.sh
+
+knudown
+```
+
 ## 빌드방법
 
 ```shell
@@ -86,7 +95,9 @@ unset cwd
 
 ## 실행방법 : 실행파일
 
-(미구현)
+```shell
+./knu-lms-auto-download/build/bin/knudown [options] [subject_name] [output_directory]
+```
 
 ## 실행방법 : 테스트
 
