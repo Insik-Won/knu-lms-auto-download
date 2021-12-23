@@ -295,7 +295,8 @@ int process_arguments(int argc, char* argv[]) {
   }
 
   subject_pattern = argv[optind];
-  directory = argv[optind + 1];
+  if (directory == NULL)
+    directory = argv[optind + 1];
 
   return 0;
 }
