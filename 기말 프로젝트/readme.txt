@@ -8,6 +8,7 @@
   - 아래 명령어를 입력한다.
   - <code>
     git clone https://github.com/Insik-Won/knu-lms-auto-download.git
+    cd ./knu-lms-auto-download
     chmod +x ./install.sh
     sudo ./install.sh
   - </code>

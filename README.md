@@ -62,6 +62,7 @@ $ tree
     │   └── ...           # 경북대 lms 크롤링을 위해 만든 curl 명령 쉘 파일
     ├── 프로젝트 계획.txt  # 프로젝트 초안 및 기획
     ├── readme.txt        # 사용법
+    ├── 시연.tar.bz2      # 시연 영상이 두개 들은 .tar.bz2 파일.
     └── 프로젝트 보고서.docx  # 프로젝트 보고서 - 프로젝트 개요, 상세구조 및 동작 흐름도, 결과, 참고자료
 ```
 
@@ -118,4 +119,10 @@ STUDENT_NUMBER={해당 학생의 경북대 학번}
 2. 다음 명령어를 입력한다.
 ```shell
 ./knu-lms-auto-download/build/bin/test
+```
+
+## 시연영상 압축해제 방법
+```shell
+cd "./knu-lms-auto-download/기말 프로젝트"
+tar -jxvf 시연.tar.bz2
 ```
