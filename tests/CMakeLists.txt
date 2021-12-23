@@ -15,5 +15,5 @@ add_library(test_util STATIC test_util.c)
 target_include_directories(test_util PUBLIC ${CMAKE_SOURCE_DIR}/includes)
 target_link_libraries(test_util PUBLIC cmocka knuutils)
 
-add_executable(test all_tests.c test_knustring.c test_knuutils.c test_knuapi.c)
+add_executable(test all_tests.c test_knustring.c test_knuutils.c test_knuapi.c test_knulms.c)
 target_link_libraries(test PRIVATE curl cmocka test_util knulms knuapi knuutils)

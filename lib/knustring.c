@@ -272,3 +272,38 @@ int KnuString_collapseWhitespace(KnuString* knustr) {
   return 0; 
 }
 
+int KnuString_trim(KnuString* knustr) {
+  int start = 0;
+  int end = knustr->length - 1;
+
+  while (isspace(knustr->value[start])) {
+    start++;
+  }
+
+  while (isspace(knustr->value[end])) {
+    end--;
+  }
+
+  if (start == 0) {
+    knustr->length = end - start + 1;
+    knustr->value[knustr->length] = '\0';
+  }
+  else {
+    knustr->length = end - start + 1;
+    memcpy(knustr->value, knustr->value + start, sizeof(*knustr->value) * knustr->length);
+    knustr->value[knustr->length] = '\0';
+  }
+
+  return 1;
+}
+
+int KnuString_trimEndUntil(KnuString* knustr, char sentinel) {
+  char* pch = strrchr(knustr->value, sentinel);
+  if (pch) {
+    knustr->length = (pch - knustr->value - 1) / sizeof(char);
+    *pch = '\0';
+  }
+
+  return 1;
+}
+

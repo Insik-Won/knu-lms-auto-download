@@ -15,6 +15,7 @@ int cmocka_run_group_tests_dynamically(const char* group_name, const struct CMUn
 const struct CMUnitTest* test_knustring();
 const struct CMUnitTest* test_knuutils();
 const struct CMUnitTest* test_knuapi();
+const struct CMUnitTest* test_knulms();
 
 int main(int argc, char* argv[]) {
   char buffer[FILENAME_MAX];
@@ -32,5 +33,7 @@ int main(int argc, char* argv[]) {
 
   return cmocka_run_group_tests_dynamically("KnuString test", test_knustring(), NULL, NULL)
           + cmocka_run_group_tests_dynamically("knuutils test", test_knuutils(), NULL, NULL)
-          + cmocka_run_group_tests_dynamically("knuapi test", test_knuapi(), NULL, NULL);
+          + cmocka_run_group_tests_dynamically("knuapi test", test_knuapi(), NULL, NULL)
+          + cmocka_run_group_tests_dynamically("knulms test", test_knulms(), NULL, NULL)
+          ;
 }

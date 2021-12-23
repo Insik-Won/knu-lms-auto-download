@@ -7,6 +7,7 @@
 #include <cmocka.h>
 #include <unistd.h>
 #include <dirent.h>
+#include <fnmatch.h>
 
 #include <knuutils.h>
 #include <test_util.h>
@@ -136,6 +137,11 @@ void test_unzip(void** state) {
   }
 }
 
+void test_fnmatch(void** state) {
+  assert_int_equal(fnmatch("시스템*", "시스템프로그래밍", 0), 0);
+  assert_int_equal(fnmatch("시스템*", "시스템프로그래밍 (003)", 0), 0);
+}
+
 const struct CMUnitTest* test_knuutils() {
   static const struct CMUnitTest tests[] = {
     cmocka_unit_test(test_asprintf),
@@ -144,6 +150,7 @@ const struct CMUnitTest* test_knuutils() {
     cmocka_unit_test_prestate_setup_teardown(test_html_normalize, prepare_file, clean_file, "naver.html"),
     cmocka_unit_test(test_css_select),
     cmocka_unit_test_prestate_setup_teardown(test_unzip, prepare_file, clean_file, "materials.zip"),
+    cmocka_unit_test(test_fnmatch),
     {NULL, NULL, NULL, NULL, NULL},
   }; 
 

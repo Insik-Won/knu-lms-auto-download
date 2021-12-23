@@ -74,6 +74,9 @@ int KnuString_substring(KnuString* knustr, int start, int end, KnuString* result
 int KnuString_collapse(KnuString* knustr, char to_collapse);
 int KnuString_collapseWhitespace(KnuString* knustr);
 
+int KnuString_trim(KnuString* knustr);
+int KnuString_trimEndUntil(KnuString* knustr, char sentinel);
+
 /**
  * @brief tokenize KnuString with '\0'. at last, resotre the KnuString. if you want stop, give save_ptr as NULL.
  * 

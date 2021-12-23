@@ -4,8 +4,6 @@
 #include <stddef.h>
 #include <knudef.h>
 
-
-
 /*
  * initate global knulms library
  */
@@ -29,13 +27,13 @@ StudentSession* knulms_login(const char* id, const char* password);
  */
 SubjectSession* knulms_selectFirstSubject(StudentSession* student_session, int (*subject_predicate)(const char* subject_name, int idx, size_t size));
 /*
- * download the files, which file_predicate says true, in the post which post_predicate says true. 
+ * download the files in the post which post_predicate says true. 
  * - todo: set errno to identify the error
  * - @return 0 if succeed, otherwise, non-zero value.
  */ 
-int knulms_downloadFirstPost(SubjectSession* subject_session, const char* path, 
-                              int (*post_predicate)(const char* postName, int idx, size_t size), 
-                              int (*file_predicate)(const char* filename, int idx, size_t size));
+int knulms_downloadFirstMaterial(SubjectSession* subject_session, const char* path, 
+                              int (*post_predicate)(const char* title, int idx, size_t size),
+                              const char* include_pattern, const char* exclude_pattern);
 /*
  * cancel the selection of subject.
  * call this before logout.
@@ -44,7 +42,7 @@ int knulms_downloadFirstPost(SubjectSession* subject_session, const char* path,
 StudentSession* knulms_unselectSubject(SubjectSession* session);
 /*
  * logout in Kyungpook lms and destroy session.
- * @return nonNull object if succeed, otherwise, null.
+ * @return 0 if succeed, otherwise, non-zero value.
  */
 int knulms_logout(StudentSession* session);
 

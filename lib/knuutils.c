@@ -198,7 +198,11 @@ int unzip(const char* source, const char* directory, const char* include_glob, c
 
     perror("excelp unzip error");
   }
-  wait(NULL);
+  
+  int status;
+  wait(&status);
+  if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
+    return 1;
 
-  return 1;
+  return 0;
 }

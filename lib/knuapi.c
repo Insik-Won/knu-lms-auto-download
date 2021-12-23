@@ -449,6 +449,10 @@ int knuapi_get_subject(KnuString** subject_name_list, KnuString** subject_key_li
     KnuString_appendString(&key_list[i], (char*)kj);
     KnuString_collapseWhitespace(&name_list[i]);
     KnuString_collapseWhitespace(&key_list[i]);
+    KnuString_trimEndUntil(&name_list[i], '(');
+    KnuString_trimEndUntil(&key_list[i], '(');
+    KnuString_trim(&name_list[i]);
+    KnuString_trim(&key_list[i]);
 
     xmlFree(kj);
     xmlFree(innerText);
@@ -582,6 +586,7 @@ int knuapi_get_materials(const char* student_number, const char* subject_key, Ma
     xmlChar* impt_seq = xmlGetProp(element, (xmlChar*)"impt_seq");
     KnuString_appendString(&materials[i].id, (char*)impt_seq);
     KnuString_collapseWhitespace(&materials[i].id);
+    KnuString_trim(&materials[i].id);
     xmlFree(impt_seq);
     xmlFreeDoc(doc);
   }
@@ -591,6 +596,7 @@ int knuapi_get_materials(const char* student_number, const char* subject_key, Ma
     xmlChar* innerText = xmlNodeGetContent(element);
     KnuString_appendString(&materials[i].title, (char*)innerText);
     KnuString_collapseWhitespace(&materials[i].title);
+    KnuString_trim(&materials[i].title);
     xmlFree(innerText);
     xmlFreeDoc(doc);
   }
@@ -702,7 +708,7 @@ throw:
  * @param cookie_filename the name of file that contains coookie from libcurl
  * @return 0 if succeed, otherwise, non-zero value.
  */
-int knuapi_download_material_files(const char* download_filename, const char* glob_pattern, const char* material_id, const char* subject_key, const char* student_number, const char* cookie_filename) {
+int knuapi_download_material_files(const char* download_filename, const char* material_id, const char* subject_key, const char* student_number, const char* cookie_filename) {
   HttpRequestOptions options;
   memset(&options, 0, sizeof(options));
 

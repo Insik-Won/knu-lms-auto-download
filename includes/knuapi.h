@@ -108,22 +108,12 @@ int knuapi_set_subject(const char* subject_key, const char* cookie_filename);
 int knuapi_get_materials(const char* student_number, const char* subject_key, Material** material_list, size_t* size, const char* cookie_filename);
 
 /**
- * @brief get the id of material files with cookie.
- * 
- * @param material_files_id a KnuString to contain the material files id
- * @param material_id the id of material.
- * @param cookie_filename the name of file that contains coookie from libcurl
- * @return 0 if succeed, otherwise, non-zero value.
- */
-int knuapi_get_material_download_link(KnuString* material_download_link, const char* student_number, const char* subject_key, const char* material_files_id, const char* cookie_filename);
-
-/**
  * @brief download file with id of material files and cookie. ignore the files that match to glob pattern.
  * 
  * @param cookie_filename the name of file that contains coookie from libcurl
  * @return 0 if succeed, otherwise, non-zero value.
  */
-int knuapi_download_material_files(const char* downlaod_filename, const char* glob_pattern, const char* material_id, const char* subject_key, const char* stduent_number, const char* cookie_filename);
+int knuapi_download_material_files(const char* downlaod_filename, const char* material_id, const char* subject_key, const char* stduent_number, const char* cookie_filename);
 
 
 

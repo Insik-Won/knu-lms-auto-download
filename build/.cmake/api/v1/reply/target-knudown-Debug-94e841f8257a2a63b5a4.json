@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "bin/program"
+			"path" : "bin/knudown"
 		}
 	],
 	"backtrace" : 1,
@@ -82,7 +82,7 @@
 			"id" : "json-c::@1f73e43ed239fe3d59ae"
 		}
 	],
-	"id" : "program::@5f5a17c01335469806cb",
+	"id" : "knudown::@5f5a17c01335469806cb",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -131,8 +131,8 @@
 		],
 		"language" : "C"
 	},
-	"name" : "program",
-	"nameOnDisk" : "program",
+	"name" : "knudown",
+	"nameOnDisk" : "knudown",
 	"paths" : 
 	{
 		"build" : "app",

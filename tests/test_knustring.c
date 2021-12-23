@@ -176,6 +176,15 @@ static void test_KnuString_destroy(void** state) {
   *state = NULL;
 }
 
+static void test_KnuString_trim(void** state) {
+  KnuString* str = (KnuString*)*state;
+
+  KnuString_appendString(str, "   \t\n\rHello World!   \n");
+  KnuString_trim(str);
+
+  assert_string_equal(str->value, "Hello World!");
+}
+
 const struct CMUnitTest* test_knustring() {
   static const struct CMUnitTest knuutils_tests[] = {
     cmocka_unit_test_setup_teardown(test_KnuString_init, prepare_KnuString, clean_KnuString),
@@ -186,6 +195,7 @@ const struct CMUnitTest* test_knustring() {
     cmocka_unit_test_setup_teardown(test_KnuString_tokenize, prepare_KnuString, clean_KnuString),
     cmocka_unit_test_setup_teardown(test_KnuString_collapse, prepare_KnuString, clean_KnuString),
     cmocka_unit_test_setup_teardown(test_KnuString_collapseWhitespace, prepare_KnuString, clean_KnuString),
+    cmocka_unit_test_setup_teardown(test_KnuString_trim, prepare_KnuString, clean_KnuString),
     {NULL, NULL, NULL, NULL, NULL},
   };
 
