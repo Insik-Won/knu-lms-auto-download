@@ -28,9 +28,7 @@ struct option long_options[] = {
   {"postorder", required_argument, 0, 'o'},
   {"include", required_argument, 0, 'i'},
   {"exclude", required_argument, 0, 'e'},
-  {"unzip", no_argument, 0, 'z'},
   {"quiet", no_argument, 0, 'q'},
-  {"force", no_argument, 0, 'f'},
   {0, 0, 0 ,0},
 };
 
