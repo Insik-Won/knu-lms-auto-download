@@ -74,7 +74,7 @@ sudo ./install.sh
 knudown [options] [subject_name] [output_directory]
 ```
 
-### 삭제방법
+## 삭제방법
 ```shell
 chmod +x ./uninstall.sh
 sudo ./uninstall.sh
